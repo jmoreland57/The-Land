@@ -144,19 +144,27 @@ public class Map {
         	pos.x = -scrollOffset.x;
         	fedOffset.x = 0;
         }
-        else if(fedOffset.x<160*(10-scroll)) {
-        	pos.x = -(fedOffset.x+scrollOffset.x); 
-        	fedOffset.x=160*(10-scroll);
+        else if(fedOffset.x+1600*(scroll)/10<1600){
+        	fedOffset.x = 1600-1600*(scroll)/10;
+        	pos.x = fedOffset.x-scrollOffset.x; 
         }
+//        else if(fedOffset.x>1600*(1-(scroll/10-1))){
+//        	fedOffset.x=1600*(1-(scroll/10-1));
+//        	pos.x = fedOffset.x-scrollOffset.x; 
+//        }
         pos.y = pos.y - yVelocity;
         if (fedOffset.y > 0) {
         	pos.y = -scrollOffset.y;
         	fedOffset.y = 0;
         }
-        else if(fedOffset.y<80*(10-scroll)) {
-        	pos.y = -(fedOffset.y+scrollOffset.y); 
-        	fedOffset.y=80*(10-scroll);
+        else if(fedOffset.y+800*(scroll)/10<800){
+        	fedOffset.y = 800-800*(scroll)/10;
+        	pos.y = fedOffset.y-scrollOffset.y; 
         }
+//        else if(fedOffset.y<80*(10-scroll)) {
+//        	fedOffset.y=80*(10-scroll);
+//        	pos.x = fedOffset.y-scrollOffset.y; 
+//        }
         
         System.out.println("Scrolloffset: " + scrollOffset.x + ", " + scrollOffset.y);
         System.out.println("pos2: " + pos.x + ", " + pos.y);
