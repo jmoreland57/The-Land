@@ -98,8 +98,8 @@ public class Map {
         double m = -1;
 //        double xEffect = ((1/10)-1)*(fedOffset.x-mousePos.x)*multiplier;
 //    	double yEffect = ((1/10)-1)*(fedOffset.y-mousePos.y)*multiplier;
-    	double xEffect = (0.1)*(pos.x-800)*(m);
-    	double yEffect = (0.1)*(pos.y-400)*m;
+    	double xEffect = (0.1)*(pos.x-mousePos.x)*(m);
+    	double yEffect = (0.1)*(pos.y-mousePos.y)*m;
         
         double oldScroll = scroll;
         if (zoomin && !zoomout) {
@@ -132,18 +132,15 @@ public class Map {
         pos.x = pos.x - xVelocity;
         pos.y = pos.y - yVelocity;
         
-        if (mousePos==null) {
-        	
-        }
         
-//        fedOffset = new Point.Double((double)(pos.x+(((scroll/10)-1)*(pos.x-800))),(double)(pos.y+(((scroll/10)-1)*(pos.y-400))));
+        fedOffset = new Point.Double(scrollOffset.x+pos.x,scrollOffset.y+pos.y);
        
     }
     
     public void draw(Graphics g, ImageObserver observer, double rotation) {
 		Point testpos = new Point(mousePos.x,mousePos.y);
 		for (int i = 0; i < tracts.size(); i++) {
-			tracts.get(i).draw(g, observer, rotation, new Point.Double(scrollOffset.x+pos.x,scrollOffset.y+pos.y), scroll/10, testpos);
+			tracts.get(i).draw(g, observer, rotation, fedOffset, scroll/10, testpos);
 		}
 		
         
