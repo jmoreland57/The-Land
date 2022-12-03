@@ -42,7 +42,7 @@ public class Tract {
 		for (int i = 0; i < 4; i++) {
 			System.out.println (drawn.xpoints[i] + ", " + drawn.ypoints[i]);
 		}
-		if (drawn.contains(mouse.x-10,mouse.y-30)) {
+		if (drawn.contains(mouse.x-10,mouse.y-30)&&shape.xpoints[0]!=1) {
 			g.fillPolygon(drawn);
 			System.out.println("DETECT: ");
 		}

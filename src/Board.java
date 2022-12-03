@@ -38,6 +38,7 @@ public class Board extends JPanel implements ActionListener, KeyListener, MouseL
         // initialize the game state
         
         ArrayList<Tract> tracts = new ArrayList<Tract>();
+        tracts.add(new Tract(new Polygon(new int[]{1,1,1599,1599},new int[]{1,799,799,1},4)));
         tracts.add(new Tract(new Polygon(new int[]{10,10,20,20},new int[]{10,20,20,10},4)));
         tracts.add(new Tract(new Polygon(new int[]{100,100,200,200},new int[]{100,200,200,100},4)));
         tracts.add(new Tract(new Polygon(new int[]{500,500,550,550},new int[]{200,250,250,200},4)));

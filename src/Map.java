@@ -121,19 +121,60 @@ public class Map {
         		scrollOffset.x += xEffect;
         		scrollOffset.y += yEffect;
         	}
-        	
+        
+        if (scrollOffset.x > 0) {
+            scrollOffset.x = 0;
+        }
+        if (scrollOffset.y > 0) {
+            scrollOffset.y = 0;
+        }
+        
+        
+        
         }
         
         //calc new scroll loc
         
         //apply the changes
         
+        fedOffset = new Point.Double(scrollOffset.x+pos.x,scrollOffset.y+pos.y);
         
         pos.x = pos.x - xVelocity;
+        if (fedOffset.x > 0) {
+        	pos.x = -scrollOffset.x;
+        	fedOffset.x = 0;
+        }
+        else if(fedOffset.x<160*(10-scroll)) {
+        	pos.x = -(fedOffset.x+scrollOffset.x); 
+        	fedOffset.x=160*(10-scroll);
+        }
         pos.y = pos.y - yVelocity;
+        if (fedOffset.y > 0) {
+        	pos.y = -scrollOffset.y;
+        	fedOffset.y = 0;
+        }
+        else if(fedOffset.y<80*(10-scroll)) {
+        	pos.y = -(fedOffset.y+scrollOffset.y); 
+        	fedOffset.y=80*(10-scroll);
+        }
+        
+        System.out.println("Scrolloffset: " + scrollOffset.x + ", " + scrollOffset.y);
+        System.out.println("pos2: " + pos.x + ", " + pos.y);
         
         
-        fedOffset = new Point.Double(scrollOffset.x+pos.x,scrollOffset.y+pos.y);
+        
+//        if(fedOffset.x>0) {
+//        	fedOffset.x=0;
+//        }
+//        else if(fedOffset.x<160*(10-scroll)) {
+//        	fedOffset.x=160*(10-scroll);
+//        }
+//        if(fedOffset.y>0) {
+//        	fedOffset.y=0;
+//        }
+//        else if(fedOffset.y<80*(10-scroll)) {
+//        	fedOffset.y=80*(10-scroll);
+//        }
        
     }
     
