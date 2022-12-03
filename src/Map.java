@@ -43,7 +43,7 @@ public class Map {
         if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) { downPressed = true; }
         if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) { leftPressed = true; }
         
-        if (key == KeyEvent.VK_Z && scroll < 50) { zoomin = true; }
+        if (key == KeyEvent.VK_Z && scroll < 500) { zoomin = true; }
         if (key == KeyEvent.VK_X && scroll > 10) { zoomout = true; }
         
     }
@@ -79,13 +79,14 @@ public class Map {
 //        if (pos.x < 0) { pos.x = 0; xVelocity = 0; }
 //        else if (pos.x >= Board.MAX_X - imageX) { pos.x = Board.MAX_X - imageX; xVelocity = 0.0; }
         
-        int maxSpeed = 50;
+        int maxSpeed = 500;
         
         //if the player wants to move then let them
-        if (rightPressed && !leftPressed) { xVelocity = 1 * (maxSpeed-scroll); }
-        else if (!rightPressed && leftPressed) { xVelocity = -1 * (maxSpeed-scroll); } 
-        if (upPressed && !downPressed) { yVelocity = -1 * (maxSpeed-scroll); }
-        else if (!upPressed && downPressed) { yVelocity = 1 * (maxSpeed-scroll); } 
+        double speedMult = 0.25;
+        if (rightPressed && !leftPressed) { xVelocity = speedMult * (maxSpeed-scroll); }
+        else if (!rightPressed && leftPressed) { xVelocity = -speedMult * (maxSpeed-scroll); } 
+        if (upPressed && !downPressed) { yVelocity = -speedMult * (maxSpeed-scroll); }
+        else if (!upPressed && downPressed) { yVelocity = speedMult * (maxSpeed-scroll); } 
         
         //if player does not want to move or is indesive then slow them
         if ((rightPressed && leftPressed) || (!rightPressed && !leftPressed)) {
@@ -95,17 +96,17 @@ public class Map {
         	yVelocity = 0;
         }
         
-        double m = -1;
+        double m = 5; //zoom speed
 //        double xEffect = ((1/10)-1)*(fedOffset.x-mousePos.x)*multiplier;
 //    	double yEffect = ((1/10)-1)*(fedOffset.y-mousePos.y)*multiplier;
-    	double xEffect = (0.1)*(pos.x-mousePos.x)*(m);
-    	double yEffect = (0.1)*(pos.y-mousePos.y)*m;
+    	double xEffect = -(0.1)*(pos.x-mousePos.x)*m;
+    	double yEffect = -(0.1)*(pos.y-mousePos.y)*m;
         
         double oldScroll = scroll;
         if (zoomin && !zoomout) {
-        	scroll += 1;
-        	if (scroll > 50) {
-        		scroll = 50;
+        	scroll += m;
+        	if (scroll > 500) {
+        		scroll = 500;
         	}
         	else {
             	scrollOffset.x -= xEffect;
@@ -113,7 +114,7 @@ public class Map {
         	}
         }
         else if (!zoomin && zoomout){
-        	scroll -= 1;
+        	scroll -= m;
         	if (scroll <10) {
         		scroll = 10;
         	}

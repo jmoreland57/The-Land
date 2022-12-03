@@ -30,10 +30,10 @@ public class Tract {
 		int[] newypoints = shape.ypoints.clone();
 		System.out.println("Render");
 		for (int i = 0; i < npoints; i ++) {
-			newxpoints[i] *= scroll;
+			newxpoints[i] *= scroll / 340;
 			System.out.println("real:" + shape.xpoints[i] + "-" + shape.ypoints[i]);
 			System.out.println(newxpoints[i]);
-			newypoints[i] *= scroll;
+			newypoints[i] *= scroll / 340;
 			System.out.println(newypoints[i]);
 		}
 		Polygon drawn = new Polygon(newxpoints,newypoints,npoints);
@@ -42,7 +42,7 @@ public class Tract {
 		for (int i = 0; i < 4; i++) {
 			System.out.println (drawn.xpoints[i] + ", " + drawn.ypoints[i]);
 		}
-		if (drawn.contains(mouse.x-10,mouse.y-30)&&shape.xpoints[0]!=1) {
+		if (drawn.contains(mouse.x-10,mouse.y-30)&&shape.xpoints[0]!=340) {
 			g.fillPolygon(drawn);
 			System.out.println("DETECT: ");
 		}

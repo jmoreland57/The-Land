@@ -38,12 +38,15 @@ public class Board extends JPanel implements ActionListener, KeyListener, MouseL
         // initialize the game state
         
         ArrayList<Tract> tracts = new ArrayList<Tract>();
-        tracts.add(new Tract(new Polygon(new int[]{1,1,1599,1599},new int[]{1,799,799,1},4)));
+        tracts.add(new Tract(new Polygon(new int[]{340,340,543660,543660},new int[]{340,271660,271660,340},4)));
         tracts.add(new Tract(new Polygon(new int[]{10,10,20,20},new int[]{10,20,20,10},4)));
         tracts.add(new Tract(new Polygon(new int[]{100,100,200,200},new int[]{100,200,200,100},4)));
         tracts.add(new Tract(new Polygon(new int[]{500,500,550,550},new int[]{200,250,250,200},4)));
         tracts.add(new Tract(new Polygon(new int[]{200,200,250,250},new int[]{700,750,750,700},4)));
         tracts.add(new Tract(new Polygon(new int[]{750,750,850,850},new int[]{350,450,450,350},4)));
+        tracts.add(new Tract(new Polygon(new int[]{50000,50000,55000,55000},new int[]{20000,25000,25000,20000},4)));
+        tracts.add(new Tract(new Polygon(new int[]{20000,20000,25000,25000},new int[]{70000,75000,75000,70000},4)));
+        tracts.add(new Tract(new Polygon(new int[]{75000,75000,85000,85000},new int[]{35000,45000,45000,35000},4)));
 
         map = new Map(tracts);
         
