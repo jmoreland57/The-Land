@@ -24,6 +24,8 @@ public class Map {
     public double scroll = 10;
     
     public Point.Double pos = new Point.Double(0,0); // position
+    public Point.Double scrollOffset = new Point.Double(0,0);
+    public Point.Double fedOffset = new Point.Double(0,0); // actual one that gets passed to tracts
     
     public Point mousePos = new Point();
     public Point lastMousePos = new Point();
@@ -93,22 +95,33 @@ public class Map {
         	yVelocity = 0;
         }
         
+        double m = -1;
+//        double xEffect = ((1/10)-1)*(fedOffset.x-mousePos.x)*multiplier;
+//    	double yEffect = ((1/10)-1)*(fedOffset.y-mousePos.y)*multiplier;
+    	double xEffect = (0.1)*(pos.x-800)*(m);
+    	double yEffect = (0.1)*(pos.y-400)*m;
+        
         double oldScroll = scroll;
         if (zoomin && !zoomout) {
         	scroll += 1;
+        	if (scroll > 50) {
+        		scroll = 50;
+        	}
+        	else {
+            	scrollOffset.x -= xEffect;
+            	scrollOffset.y -= yEffect;
+        	}
         }
         else if (!zoomin && zoomout){
         	scroll -= 1;
         	if (scroll <10) {
         		scroll = 10;
         	}
+        	else {
+        		scrollOffset.x += xEffect;
+        		scrollOffset.y += yEffect;
+        	}
         	
-        }
-        else if (scroll > maxSpeed-1){
-        	scroll = maxSpeed-1;
-        }
-        else if (scroll < 0.5) {
-        	scroll = 0.5;
         }
         
         //calc new scroll loc
@@ -116,16 +129,21 @@ public class Map {
         //apply the changes
         
         
-        pos.x = pos.x +  xVelocity;
-        pos.y = pos.y +  yVelocity;
+        pos.x = pos.x - xVelocity;
+        pos.y = pos.y - yVelocity;
         
+        if (mousePos==null) {
+        	
+        }
         
+//        fedOffset = new Point.Double((double)(pos.x+(((scroll/10)-1)*(pos.x-800))),(double)(pos.y+(((scroll/10)-1)*(pos.y-400))));
+       
     }
     
     public void draw(Graphics g, ImageObserver observer, double rotation) {
 		Point testpos = new Point(mousePos.x,mousePos.y);
 		for (int i = 0; i < tracts.size(); i++) {
-			tracts.get(i).draw(g, observer, rotation, new Point.Double ((double)(pos.x+(((scroll/10)-1)*(pos.x-800))),(double)(pos.y+(((scroll/10)-1)*(pos.y-400)))), scroll/10, testpos);
+			tracts.get(i).draw(g, observer, rotation, new Point.Double(scrollOffset.x+pos.x,scrollOffset.y+pos.y), scroll/10, testpos);
 		}
 		
         
