@@ -15,12 +15,13 @@ import java.awt.geom.Area;
 public class Tract {
 	
 	boolean hovered;
-	
 	public Polygon shape;
+	public String name;
 	
-	public Tract (Polygon nshape) {
+	public Tract (Polygon nshape, String nname) {
 		shape = nshape;
 		hovered = false;
+		name = nname;
 	}
 	
 	public void draw(Graphics g, ImageObserver observer, double rotation, Point.Double offset, double scroll, Point mouse) {
@@ -45,6 +46,9 @@ public class Tract {
 		if (drawn.contains(mouse.x-10,mouse.y-30)&&shape.xpoints[0]!=340) {
 			g.fillPolygon(drawn);
 			System.out.println("DETECT: ");
+	        g.setColor(new Color(232,232,232));
+	        g.drawString(name,20,820);
+	        g.setColor(new Color(0,0,0));
 		}
 		System.out.println(mouse.x + ", " + mouse.y);
         g.drawPolygon(drawn);

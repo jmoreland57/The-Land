@@ -14,7 +14,7 @@ public class Board extends JPanel implements ActionListener, KeyListener, MouseL
     
     // controls the size of the board
     public static final int MAX_X = 1600;
-    public static final int MAX_Y = 800;
+    public static final int MAX_Y = 850;
     
     public static final int HEALTH_BAR_Y = 25;
 
@@ -38,15 +38,15 @@ public class Board extends JPanel implements ActionListener, KeyListener, MouseL
         // initialize the game state
         
         ArrayList<Tract> tracts = new ArrayList<Tract>();
-        tracts.add(new Tract(new Polygon(new int[]{340,340,543660,543660},new int[]{340,271660,271660,340},4)));
-        tracts.add(new Tract(new Polygon(new int[]{10,10,20,20},new int[]{10,20,20,10},4)));
-        tracts.add(new Tract(new Polygon(new int[]{100,100,200,200},new int[]{100,200,200,100},4)));
-        tracts.add(new Tract(new Polygon(new int[]{500,500,550,550},new int[]{200,250,250,200},4)));
-        tracts.add(new Tract(new Polygon(new int[]{200,200,250,250},new int[]{700,750,750,700},4)));
-        tracts.add(new Tract(new Polygon(new int[]{750,750,850,850},new int[]{350,450,450,350},4)));
-        tracts.add(new Tract(new Polygon(new int[]{50000,50000,55000,55000},new int[]{20000,25000,25000,20000},4)));
-        tracts.add(new Tract(new Polygon(new int[]{20000,20000,25000,25000},new int[]{70000,75000,75000,70000},4)));
-        tracts.add(new Tract(new Polygon(new int[]{75000,75000,85000,85000},new int[]{35000,45000,45000,35000},4)));
+        tracts.add(new Tract(new Polygon(new int[]{340,340,543660,543660},new int[]{340,271660,271660,340},4),"Tract 1"));
+        tracts.add(new Tract(new Polygon(new int[]{10,10,20,20},new int[]{10,20,20,10},4),"Rancho"));
+        tracts.add(new Tract(new Polygon(new int[]{100,100,200,200},new int[]{100,200,200,100},4),"Farm"));
+        tracts.add(new Tract(new Polygon(new int[]{500,500,550,550},new int[]{200,250,250,200},4),"Hills"));
+        tracts.add(new Tract(new Polygon(new int[]{200,200,250,250},new int[]{700,750,750,700},4),"Plain"));
+        tracts.add(new Tract(new Polygon(new int[]{750,750,850,850},new int[]{350,450,450,350},4),"Georgian"));
+        tracts.add(new Tract(new Polygon(new int[]{50000,50000,55000,55000},new int[]{20000,25000,25000,20000},4),"Robinson"));
+        tracts.add(new Tract(new Polygon(new int[]{20000,20000,25000,25000},new int[]{70000,75000,75000,70000},4),"Radio"));
+        tracts.add(new Tract(new Polygon(new int[]{75000,75000,85000,85000},new int[]{35000,45000,45000,35000},4),"Hyatt"));
 
         map = new Map(tracts);
         
@@ -84,8 +84,12 @@ public class Board extends JPanel implements ActionListener, KeyListener, MouseL
  
         // draw our graphics.
         //drawScore(g);
-        map.draw(g, this, 0);
         
+        g.setColor(new Color(10, 50, 50));
+        Polygon bottomPanel = new Polygon(new int[] {0,0,1600,1600},new int[]{800,850,850,800},4);
+        g.fillPolygon(bottomPanel);
+        g.setColor(new Color(0, 0, 0));
+        map.draw(g, this, 0);
     	//drawing the health
 
         // set the text to be displayed
